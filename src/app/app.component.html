@@ -10,7 +10,7 @@
 
 <ul>
   <li *ngFor="let game of games; let i = index">
-    GAME #{{ game.id }} : {{ game.white }} vs {{ game.black }}
+    GAME #{{ i }} : {{ game.white }} vs {{ game.black }}
     <button>details</button>
     <button (click)="deleteGame(i)">delete</button>
   </li>
