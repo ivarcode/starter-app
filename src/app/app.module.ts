@@ -5,21 +5,14 @@ import { AppComponent } from './app.component';
 
 // games service
 import { GamesService } from './games.service';
+
+// gameview component
 import { GameviewComponent } from './gameview/gameview.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    GameviewComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [
-    GamesService
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  declarations: [AppComponent, GameviewComponent],
+  imports: [BrowserModule],
+  providers: [GamesService],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

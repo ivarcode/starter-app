@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GamesService } from './games.service';
 import { Game } from './models/game.interface';
 
@@ -14,7 +14,16 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.games = this.gamesService.getGames();
   }
-  addGame() {
-    this.games.push({id:this.games.length+1,white:'cam',black:'nick',numberOfMoves:75,result:'black wins by resignation in a drawn position'})
+  addGame(): void {
+    this.games.push({
+      id: this.games.length + 1,
+      white: 'cam',
+      black: 'nick',
+      numberOfMoves: 75,
+      result: 'black wins by resignation in a drawn position'
+    });
+  }
+  deleteGame(gid: number): void {
+    this.games.splice(gid, 1);
   }
 }
