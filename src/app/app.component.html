@@ -8,17 +8,7 @@
   />
 </div>
 
-<ul>
-  <li *ngFor="let game of games; let i = index">
-    GAME #{{ i }} : {{ game.white }} vs {{ game.black }}
-    <button>details</button>
-    <button (click)="deleteGame(i)">delete</button>
-  </li>
-</ul>
-
-<br />
-
-<button (click)="addGame()">add a game!</button>
+<app-games></app-games>
 
 <h2>Here are some links to help you start:</h2>
 <ul>

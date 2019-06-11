@@ -1,0 +1,15 @@
+<p>
+  games works!
+</p>
+
+<ul>
+  <li *ngFor="let game of games; let i = index">
+    GAME #{{ i }} : {{ game.white }} vs {{ game.black }}
+    <button routerLink="game-details">details</button>
+    <button (click)="deleteGame(i)">delete</button>
+  </li>
+</ul>
+
+<br />
+
+<button (click)="addGame()">add a game!</button>
