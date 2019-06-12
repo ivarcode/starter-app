@@ -24,30 +24,26 @@ export interface IEmployee {
 })
 export class DummyService {
   private employees: IEmployee[];
-
+  private baseURL: string = 'http://dummy.restapiexample.com/api/v1/employees';
   constructor(private http: HttpClient) {}
 
   getEmployeeData(): Observable<IEmployee[]> {
     if (this.employees) {
       return of(this.employees);
     }
-    return this.http
-      .get<IEmployeeFromAPI[]>(
-        'http://dummy.restapiexample.com/api/v1/employees'
-      )
-      .pipe(
-        map(data => {
-          return data.map(emp => {
-            return {
-              employeeAge: parseInt(emp.employee_age),
-              employeeName: emp.employee_name,
-              employeeSalary: parseInt(emp.employee_salary),
-              id: parseInt(emp.id),
-              profileImage: emp.profile_image
-            };
-          });
-        }),
-        tap(data => (this.employees = data))
-      );
+    return this.http.get<IEmployeeFromAPI[]>(this.baseURL).pipe(
+      map(data => {
+        return data.map(emp => {
+          return {
+            employeeAge: parseInt(emp.employee_age),
+            employeeName: emp.employee_name,
+            employeeSalary: parseInt(emp.employee_salary),
+            id: parseInt(emp.id),
+            profileImage: emp.profile_image
+          };
+        });
+      }),
+      tap(data => (this.employees = data))
+    );
   }
 }

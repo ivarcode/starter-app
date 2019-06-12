@@ -10,12 +10,27 @@
 
 <router-outlet></router-outlet>
 
+<br />
+<hr />
+<br />
+
 <button (click)="getEmployeeData()">getEmployeeData</button>
 <button (click)="getNextTen()">getNextTen</button>
 
 <ul>
-  <li *ngFor="let emp of employees">{{ emp.id }} : {{ emp.employeeName }}</li>
+  <li *ngFor="let emp of employees; let i = index">
+    {{ i }} == {{ emp.id }} : {{ emp.employeeName }}
+  </li>
 </ul>
+
+<br />
+
+<input
+  type="text"
+  [ngModel]="individualIndex"
+  (ngModelChange)="handleChange($event)"
+/>
+<button (click)="getIndividual()">get ^ THAT ^ individual</button>
 
 <h2>Here are some links to help you start:</h2>
 <ul>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DummyService, IEmployee } from './dummy.service';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { DummyService, IEmployee } from './dummy.service';
 })
 export class AppComponent implements OnInit {
   title = 'starter-app (needs a better name)';
+  individualIndex = 0;
   get employees(): IEmployee[] {
     if (!this.allEmployees) {
       return [];
@@ -31,5 +33,14 @@ export class AppComponent implements OnInit {
   getNextTen(): void {
     this.currentIndex += 10;
     this.getEmployeeData();
+  }
+
+  getIndividual(): IEmployee {
+    console.log(this.employees[this.individualIndex]);
+    return this.employees[this.individualIndex];
+  }
+
+  handleChange(value: number) {
+    this.individualIndex = value;
   }
 }
