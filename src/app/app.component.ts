@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DummyService, IEmployee } from './dummy.service';
 import { NgModule } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +24,20 @@ export class AppComponent implements OnInit {
   }
   allEmployees: IEmployee[];
   currentIndex = 0;
+  profileForm: FormGroup;
 
-  constructor(private dummyService: DummyService) {}
+  constructor(private dummyService: DummyService, private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.profileForm = new FormGroup({
+    //   fName: new FormControl('default value'),
+    //   lName: new FormControl('', Validators.required)
+    // });
+    this.profileForm = this.fb.group({
+      fName: [''],
+      lName: ['', Validators.required]
+    });
+  }
 
   getEmployeeData(): void {
     this.dummyService.getEmployeeData().subscribe(data => {
@@ -42,5 +58,21 @@ export class AppComponent implements OnInit {
 
   handleChange(value: number) {
     this.individualIndex = value;
+  }
+
+  logForm(value) {
+    console.log(value);
+  }
+
+  saveForm(): void {
+    if (this.profileForm.valid) {
+      console.log(this.profileForm.value);
+    } else {
+      alert('form not valid');
+    }
+  }
+
+  updateFirstName(): void {
+    this.profileForm.patchValue({ fName: 'John', lName: 'Graham' });
   }
 }
