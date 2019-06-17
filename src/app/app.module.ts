@@ -14,6 +14,7 @@ import { GameviewComponent } from './gameview/gameview.component';
 import { GamesComponent } from './games/games.component';
 import { AddGameComponent } from './games/components/add-game/add-game.component';
 import { FancyDirective } from './fancy.directive';
+import { ChessGamePipe } from './chessgamepipe.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FancyDirective } from './fancy.directive';
     GameviewComponent,
     GamesComponent,
     AddGameComponent,
-    FancyDirective
+    FancyDirective,
+    ChessGamePipe
   ],
   imports: [
     BrowserModule,
