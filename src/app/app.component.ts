@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DummyService, IEmployee } from './dummy.service';
 import { NgModule } from '@angular/core';
 import {
@@ -14,6 +14,8 @@ import {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @ViewChild('imgLogo', { static: false }) imgLogo: ElementRef;
+
   title = 'starter-app (needs a better name)';
   individualIndex = 0;
   get employees(): IEmployee[] {
@@ -37,6 +39,8 @@ export class AppComponent implements OnInit {
       fName: [''],
       lName: ['', Validators.required]
     });
+
+    console.log(this.imgLogo);
   }
 
   getEmployeeData(): void {

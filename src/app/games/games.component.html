@@ -19,4 +19,14 @@
 <hr />
 <p>reactive forms</p>
 <br />
-<form [formGroup]="form"></form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <add-game [parent]="form"></add-game>
+
+  <div class="games_buttons">
+    <button type="submit" [disabled]="form.invalid">
+      create game
+    </button>
+  </div>
+
+  <pre>{{ form.value | json }}</pre>
+</form>

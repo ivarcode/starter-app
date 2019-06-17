@@ -1,0 +1,12 @@
+<div [formGroup]="parent">
+  <div formGroupName="game">
+    <input type="text" placeholder="white" formControlName="white" />
+    <input type="text" placeholder="black" formControlName="black" />
+    <input
+      type="number"
+      placeholder="number of moves"
+      formControlName="numberOfMoves"
+    />
+    <input type="text" placeholder="result" formControlName="result" />
+  </div>
+</div>
