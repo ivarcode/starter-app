@@ -14,9 +14,8 @@ import {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('imgLogo', { static: false }) imgLogo: ElementRef;
-
   title = 'starter-app (needs a better name)';
+  colorValue: string;
   individualIndex = 0;
   get employees(): IEmployee[] {
     if (!this.allEmployees) {
@@ -39,8 +38,7 @@ export class AppComponent implements OnInit {
       fName: [''],
       lName: ['', Validators.required]
     });
-
-    console.log(this.imgLogo);
+    this.colorValue = 'blue';
   }
 
   getEmployeeData(): void {
@@ -74,6 +72,10 @@ export class AppComponent implements OnInit {
     } else {
       alert('form not valid');
     }
+  }
+
+  changeColorToGreen() {
+    this.colorValue = 'green';
   }
 
   updateFirstName(): void {

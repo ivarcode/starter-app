@@ -13,13 +13,15 @@ import { GamesService } from './games.service';
 import { GameviewComponent } from './gameview/gameview.component';
 import { GamesComponent } from './games/games.component';
 import { AddGameComponent } from './games/components/add-game/add-game.component';
+import { FancyDirective } from './fancy.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameviewComponent,
     GamesComponent,
-    AddGameComponent
+    AddGameComponent,
+    FancyDirective
   ],
   imports: [
     BrowserModule,
