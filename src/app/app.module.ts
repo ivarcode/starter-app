@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 // services
 import { GamesService } from './games.service';
+import { CookieService } from 'ngx-cookie-service';
 
 // components
 import { GameviewComponent } from './gameview/gameview.component';
@@ -15,6 +16,7 @@ import { GamesComponent } from './games/games.component';
 import { AddGameComponent } from './games/components/add-game/add-game.component';
 import { FancyDirective } from './fancy.directive';
 import { ChessGamePipe } from './chessgamepipe.pipe';
+import { SomeFormComponent } from './someform.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ChessGamePipe } from './chessgamepipe.pipe';
     GamesComponent,
     AddGameComponent,
     FancyDirective,
-    ChessGamePipe
+    ChessGamePipe,
+    SomeFormComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { ChessGamePipe } from './chessgamepipe.pipe';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [GamesService],
+  providers: [GamesService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

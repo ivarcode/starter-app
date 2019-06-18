@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DummyService, IEmployee } from './dummy.service';
 import { NgModule } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
 import {
   FormControl,
   FormGroup,
@@ -15,15 +16,33 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'starter-app (needs a better name)';
+  filterText = '';
+  showForm = true;
+  searchControl = new FormControl('');
+  get filteredEmployees(): IEmployee[] {
+    if (!this.filterText) {
+      return this.employees;
+    }
+    return this.employees.filter(item => {
+      if (
+        /* does the employee name contain the filterText within it */
+        item.employeeName.toLowerCase().includes(this.filterText.toLowerCase())
+      ) {
+        return true;
+      }
+      return false;
+    });
+  }
   colorValue: string;
   individualIndex = 0;
+  allEmployees: IEmployee[];
   get employees(): IEmployee[] {
     if (!this.allEmployees) {
       return [];
     }
-    return this.allEmployees.slice(this.currentIndex, this.currentIndex + 10);
+    return this.allEmployees;
+    // return this.allEmployees.slice(this.currentIndex, this.currentIndex + 10);
   }
-  allEmployees: IEmployee[];
   currentIndex = 0;
   profileForm: FormGroup;
 
@@ -39,6 +58,15 @@ export class AppComponent implements OnInit {
       lName: ['', Validators.required]
     });
     this.colorValue = 'blue';
+
+    // added to GET from database automatically w/o button
+    this.getEmployeeData();
+    // anytime the value of the searchControl form changes... but delay 500ms
+    // we do not want this to fire every keystroke, for example every half second pause
+    this.searchControl.valueChanges.pipe(debounceTime(500)).subscribe(value => {
+      this.filterText = value;
+      console.log(this.filterText);
+    });
   }
 
   getEmployeeData(): void {
