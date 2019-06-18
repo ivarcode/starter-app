@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DummyService, IEmployee } from './dummy.service';
+import { CookieService } from 'ngx-cookie-service';
 import { NgModule } from '@angular/core';
 import { debounceTime } from 'rxjs/operators';
 import {
@@ -16,8 +17,13 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'starter-app (needs a better name)';
+  allCookies: {};
+  addCookieForm = new FormGroup({
+    cookieName: new FormControl('', [Validators.required]),
+    cookieContent: new FormControl('', [Validators.required])
+  });
   filterText = '';
-  showForm = true;
+  showForm = false;
   searchControl = new FormControl('');
   get filteredEmployees(): IEmployee[] {
     if (!this.filterText) {
@@ -46,7 +52,11 @@ export class AppComponent implements OnInit {
   currentIndex = 0;
   profileForm: FormGroup;
 
-  constructor(private dummyService: DummyService, private fb: FormBuilder) {}
+  constructor(
+    private dummyService: DummyService,
+    private cookieService: CookieService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     // this.profileForm = new FormGroup({
@@ -67,6 +77,7 @@ export class AppComponent implements OnInit {
       this.filterText = value;
       console.log(this.filterText);
     });
+    this.getCookies();
   }
 
   getEmployeeData(): void {
@@ -108,5 +119,27 @@ export class AppComponent implements OnInit {
 
   updateFirstName(): void {
     this.profileForm.patchValue({ fName: 'John', lName: 'Graham' });
+  }
+
+  getCookies(): void {
+    this.allCookies = this.cookieService.getAll();
+  }
+
+  createCookie(): void {
+    this.cookieService.set(
+      this.addCookieForm.value.cookieName,
+      this.addCookieForm.value.cookieContent
+    );
+    this.getCookies();
+  }
+
+  deleteSpecificCookie(): void {
+    this.cookieService.delete(this.addCookieForm.value.cookieName);
+    this.getCookies();
+  }
+
+  deleteAllCookies(): void {
+    this.cookieService.deleteAll();
+    this.getCookies();
   }
 }

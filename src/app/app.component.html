@@ -16,6 +16,27 @@
 <button (click)="showForm = !showForm">flip dat form boolean</button>
 <app-some-form *ngIf="showForm"></app-some-form>
 
+<br />
+<br />
+
+<h3>COOKIES</h3>
+<p>
+  {{ allCookies | json }}
+</p>
+
+<form [formGroup]="addCookieForm">
+  <label>cookieName</label>
+  <input type="text" formControlName="cookieName" />
+  <label>cookieContent</label>
+  <input type="text" formControlName="cookieContent" />
+  <br />
+  <button type="submit" (click)="createCookie()">create cookie</button>
+  <button type="submit" (click)="deleteSpecificCookie()">
+    delete cookie that corresponds to cookieName ^ field
+  </button>
+  <button type="submit" (click)="deleteAllCookies()">delete ALL cookies</button>
+</form>
+
 <!-- <input type="text" [(ngModel)]="filterText" />
 <form>
   <input type="text" [formControl]="searchControl" />
