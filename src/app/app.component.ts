@@ -126,10 +126,22 @@ export class AppComponent implements OnInit {
   }
 
   createCookie(): void {
-    this.cookieService.set(
-      this.addCookieForm.value.cookieName,
+    if (
+      /* if neither field is empty */
+      this.addCookieForm.value.cookieName &&
       this.addCookieForm.value.cookieContent
-    );
+    ) {
+      // add cookie
+      this.cookieService.set(
+        this.addCookieForm.value.cookieName,
+        this.addCookieForm.value.cookieContent,
+        /*expires in 1 day/s*/
+        1
+      );
+      // clear text boxes
+      this.addCookieForm.value.cookieName = '';
+      this.addCookieForm.value.cookieContent = '';
+    }
     this.getCookies();
   }
 
